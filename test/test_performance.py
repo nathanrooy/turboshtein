@@ -1,17 +1,12 @@
-from random import choices, randint, sample
-from timeit import timeit
 from math import floor
+from random import randint
+from timeit import timeit
 import importlib
 import pandas as pd
+from utils import create_strings
 
 
-ascii = '''0123456789\
-abcdefghijklmnopqrstuvwxyz\
-ABCDEFGHIJKLMNOPQRSTUVWXYZ\
-!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~'''
-
-
-SAMPLE_SIZE = 100_00
+SAMPLE_SIZE = 1_000_000
 S_LENS = [8, 16, 24, 32, 40, 48, 56]
 LIBS = [
     ('jellyfish','levenshtein_distance'),
@@ -20,14 +15,6 @@ LIBS = [
     ('textdistance','levenshtein'),
     ('turboshtein','levenshtein'),
 ]
-
-
-def create_strings(s_len, edit_dist):
-    s1 = choices(ascii, k=s_len)
-    s2 = s1[:]
-    for idx in sample([i for i in range(len(s1))], edit_dist):
-        s2[idx] = choices([c for c in ascii if c not in s1], k=1)[0]
-    return [''.join(s1), ''.join(s2)]
 
 
 funcs = []
@@ -48,12 +35,7 @@ for s_len in S_LENS:
 df = pd.DataFrame(df, columns=['library', 'string_length', 'duration'])
 df['pairs/sec'] = df['duration'].apply(lambda x: floor(SAMPLE_SIZE / x))
 df = (
-    df
-    .pivot_table(
-        index='library',
-        columns='string_length',
-        values='pairs/sec'
-    )
+    df.pivot_table(index='library', columns='string_length', values='pairs/sec')
     .reset_index()
     .sort_values(by=[8], ascending=False)
 )
