@@ -92,12 +92,51 @@ static PyObject* turboshtein_levenshtein(PyObject *self, PyObject *args) {
 }
 
 
+PyDoc_STRVAR(levenshtein_doc,
+    "Computes the Levenshtein distance between two strings.\n"
+    "\n"
+    ".. warning::\n"
+    "   This function is especially made for internal use, **DO NOT USE THIS \n"
+    "   FUNCTION** anywhere else.\n"
+    "\n"
+    "Parameters\n"
+    "----------\n"
+    "a : str\n"
+    "    first string\n"
+    "b : str\n"
+    "    second string\n"
+    "\n"
+    "Returns\n"
+    "-------\n"
+    "edit distance : int\n"
+    "    The Levenshtein edit distance between strings `a` and `b`\n"
+    "\n"
+    "Examples\n"
+    "--------\n"
+    ">>> from turboshtein import levenshtein\n"
+    ">>> levenshtein('saturday','sunday')\n"
+    "3\n"
+    "\n"
+    "Notes\n"
+    "-----\n"
+    "This function utilizes the bit-vector algorithm developed by Myers[1]."
+    "\nIt's very fast, but this implementation has a few limitations:\n"
+    "   1. Both strings must consist of exclusively ascii characters.\n"
+    "   2. Input string lengths must be less than 64 characters each.\n"
+    "\n"
+    "[1] Gene Myers. 1999. A fast bit-vector algorithm for approximate string\n"
+    "matching based on dynamic programming. J. ACM 46, 3 (May 1999), 395-415.\n"
+    "https://doi.org/10.1145/316542.316550\n"
+    "\n"
+);
+
+
 static PyMethodDef turboshtein_methods[] = {
     {
         "levenshtein",
         turboshtein_levenshtein,
         METH_VARARGS,
-        "Levenshtein edit distance between two ascii strings"
+        levenshtein_doc
     },
     {
         NULL,
