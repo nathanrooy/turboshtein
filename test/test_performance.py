@@ -1,17 +1,12 @@
-from random import choices, randint, sample
-from timeit import timeit
 from math import floor
+from random import randint
+from timeit import repeat
 import importlib
 import pandas as pd
+from utils import create_strings
 
 
-ascii = '''0123456789\
-abcdefghijklmnopqrstuvwxyz\
-ABCDEFGHIJKLMNOPQRSTUVWXYZ\
-!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~'''
-
-
-SAMPLE_SIZE = 100_00
+SAMPLE_SIZE = 10_000
 S_LENS = [8, 16, 24, 32, 40, 48, 56]
 LIBS = [
     ('jellyfish','levenshtein_distance'),
@@ -22,16 +17,8 @@ LIBS = [
 ]
 
 
-def create_strings(s_len, edit_dist):
-    s1 = choices(ascii, k=s_len)
-    s2 = s1[:]
-    for idx in sample([i for i in range(len(s1))], edit_dist):
-        s2[idx] = choices([c for c in ascii if c not in s1], k=1)[0]
-    return [''.join(s1), ''.join(s2)]
-
-
 funcs = []
-for mname, fname in sorted(LIBS):
+for mname, fname in LIBS:
     module = importlib.import_module(mname)
     for _fname in fname.split('.'):
         module = getattr(module, _fname)
@@ -42,18 +29,13 @@ df = []
 for s_len in S_LENS:
     w = [create_strings(s_len, randint(0, s_len)) for _ in range(SAMPLE_SIZE)]
     for f, lib in zip(*[funcs, LIBS]):
-        t = timeit(lambda: [f(w1, w2) for w1, w2 in w], number=1)
-        df.append(['.'.join(lib), s_len, t])
+        t = repeat(lambda: [f(w1, w2) for w1, w2 in w], repeat=1_000, number=1)
+        df.append(['.'.join(lib), s_len, min(t)])
 
 df = pd.DataFrame(df, columns=['library', 'string_length', 'duration'])
 df['pairs/sec'] = df['duration'].apply(lambda x: floor(SAMPLE_SIZE / x))
 df = (
-    df
-    .pivot_table(
-        index='library',
-        columns='string_length',
-        values='pairs/sec'
-    )
+    df.pivot_table(index='library', columns='string_length', values='pairs/sec')
     .reset_index()
     .sort_values(by=[8], ascending=False)
 )

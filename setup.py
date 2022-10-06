@@ -23,6 +23,6 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     name='turboshtein',
     python_requires='>=3.4',
-    url='https://github.com/nathanrooy/turboshtein',
-    version='0.0.2'
+    url='https://githubcom/nathanrooy/turboshtein',
+    version='0.0.4'
 )
