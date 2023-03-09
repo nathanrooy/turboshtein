@@ -1,9 +1,9 @@
 # turboshtein
 
-[![gh-actions-ci](https://img.shields.io/github/workflow/status/nathanrooy/turboshtein/ci?style=flat-square)](https://github.com/nathanrooy/turboshtein/actions?query=workflow%3Aci)
-[![GitHub license](https://img.shields.io/github/license/nathanrooy/turboshtein?style=flat-square)](https://github.com/nathanrooy/turboshtein/blob/master/LICENSE)
-[![PyPI pyversions](https://img.shields.io/pypi/pyversions/turboshtein.svg?style=flat-square)](https://pypi.org/pypi/turboshtein/)
-[![PyPi Version](https://img.shields.io/pypi/v/turboshtein.svg?style=flat-square)](https://pypi.org/project/turboshtein)
+[![ci](https://github.com/nathanrooy/turboshtein/actions/workflows/ci.yaml/badge.svg)](https://github.com/nathanrooy/turboshtein/actions/workflows/ci.yaml)
+[![GitHub license](https://img.shields.io/github/license/nathanrooy/turboshtein)](https://github.com/nathanrooy/turboshtein/blob/master/LICENSE)
+[![PyPI pyversions](https://img.shields.io/pypi/pyversions/turboshtein.svg)](https://pypi.org/pypi/turboshtein/)
+[![PyPi Version](https://img.shields.io/pypi/v/turboshtein.svg)](https://pypi.org/project/turboshtein)
 
 ## Background
 I didn't study computer science so [bitwise operations](https://en.wikipedia.org/wiki/Bitwise_operation) have always been a bit of a gray area for me. I finally gave in and decided to spend some time reading up on the subject and ended up implementing the Myers bit-parallel algorithm<sup>[[1](https://github.com/nathanrooy/turboshtein#references)]</sup> for computing [Levenshtein edit distance](https://en.wikipedia.org/wiki/Levenshtein_distance). I was fairly happy with the results so I wrapped the original C code in Python and uploaded it to PyPI. Coincidentally, it's also pretty fast.
