@@ -49,7 +49,7 @@ static int64_t myers(uint8_t *t, int64_t n, uint8_t *p, int64_t m) {
         }
 
         // update vertical delta values
-        ph = (ph << 1);
+        ph = (ph << 1) | 1;
         pv = (mh << 1) | ~ (xv | ph);
         mv = ph & xv;
     }
