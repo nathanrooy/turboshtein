@@ -15,9 +15,9 @@ Install via PyPI:
 pip install turboshtein
 ```
 
-Or not:
-```
-python setup.py install
+Or from source:
+```sh
+pip install .
 ```
 
 Computing levenshtein edit distance between two strings:

@@ -145,13 +145,13 @@ static PyMethodDef turboshtein_methods[] = {
 
 static struct PyModuleDef turboshtein_definition = {
     PyModuleDef_HEAD_INIT,
-    "turboshtein", 
+    "_turboshtein", 
     "Fast Levenshtein edit distance calculations in Python",
     -1,
     turboshtein_methods
 };
 
 
-PyMODINIT_FUNC PyInit_turboshtein(void) {
+PyMODINIT_FUNC PyInit__turboshtein(void) {
     return PyModule_Create(&turboshtein_definition);
 };

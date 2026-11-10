@@ -1,0 +1,66 @@
+[build-system]
+requires = ["setuptools>=77.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "turboshtein"
+dynamic = ["version"]
+description = "Levenshtein edit distance computed quickly"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [
+    { name = "Nathan A. Rooy", email = "nathanrooy@gmail.com" },
+]
+keywords = ["levenshtein distance"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Programming Language :: C",
+    "Operating System :: OS Independent",
+    "Typing :: Typed",
+]
+
+[project.urls]
+Homepage = "https://github.com/nathanrooy/turboshtein"
+Repository = "https://github.com/nathanrooy/turboshtein"
+Issues = "https://github.com/nathanrooy/turboshtein/issues"
+
+[project.optional-dependencies]
+dev = [
+    "mypy>=1.0",
+    "ruff>=0.8.0",
+]
+
+[tool.setuptools.dynamic]
+version = { attr = "turboshtein.__about__.__version__" }
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["turboshtein*"]
+
+[tool.setuptools.package-data]
+turboshtein = ["py.typed", "*.pyi"]
+
+[tool.setuptools.exclude-package-data]
+turboshtein = ["*.c"]
+
+[[tool.setuptools.ext-modules]]
+name = "turboshtein._turboshtein"
+sources = ["turboshtein/_turboshtein.c"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "PIE", "RUF"]
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
