@@ -1,9 +1,10 @@
 # turboshtein
 
-[![ci](https://github.com/nathanrooy/turboshtein/actions/workflows/ci.yaml/badge.svg)](https://github.com/nathanrooy/turboshtein/actions/workflows/ci.yaml)
-[![GitHub license](https://img.shields.io/github/license/nathanrooy/turboshtein)](https://github.com/nathanrooy/turboshtein/blob/master/LICENSE)
-[![PyPI pyversions](https://img.shields.io/pypi/pyversions/turboshtein.svg)](https://pypi.org/pypi/turboshtein/)
-[![PyPi Version](https://img.shields.io/pypi/v/turboshtein.svg)](https://pypi.org/project/turboshtein)
+[![PyPi Version](https://img.shields.io/pypi/v/turboshtein.svg?style=flat-square)](https://pypi.org/project/turboshtein/)
+[![PyPI pyversions](https://img.shields.io/pypi/pyversions/turboshtein.svg?style=flat-square)](https://pypi.org/project/turboshtein/)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/nathanrooy/turboshtein/ci.yaml?branch=main&style=flat-square)](https://github.com/nathanrooy/turboshtein/actions/workflows/ci.yaml)
+[![GitHub license](https://img.shields.io/github/license/nathanrooy/turboshtein?style=flat-square)](https://github.com/nathanrooy/turboshtein/blob/main/LICENSE)
+[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json&style=flat-square)](https://github.com/astral-sh/ruff)
 
 ## Background
 I didn't study computer science so [bitwise operations](https://en.wikipedia.org/wiki/Bitwise_operation) have always been a bit of a gray area for me. I finally gave in and decided to spend some time reading up on the subject and ended up implementing the Myers bit-parallel algorithm<sup>[[1](https://github.com/nathanrooy/turboshtein#references)]</sup> for computing [Levenshtein edit distance](https://en.wikipedia.org/wiki/Levenshtein_distance). I was fairly happy with the results so I wrapped the original C code in Python and uploaded it to PyPI. Coincidentally, it's also pretty fast.
