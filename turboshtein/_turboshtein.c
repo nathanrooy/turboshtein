@@ -70,6 +70,7 @@ static PyObject* turboshtein_levenshtein(PyObject *self, PyObject *args) {
 
     if (l1 > 63 || l2 > 63) {
         PyErr_SetString(PyExc_ValueError, "input string(s) are too long.");
+        return NULL;
     }
 
     if (l1 <= l2) {
