@@ -33,9 +33,28 @@ Note that there are several limitations, mainly:
 - ASCII or Latin-1 characters only.
 
 ## Performance
-Values represent the number of string pairs processed per second.
 
-|                                 library | version |     m=n=8 |    m=n=16 |    m=n=24 |    m=n=32 |    m=n=40 |    m=n=48 |    m=n=56 |
+Values represent the number of string pairs processed per second (higher is better).
+
+### Version 0.0.5
+
+
+| library | version | turboshtein advantage | m=n=8 | m=n=16 | m=n=24 | m=n=32 | m=n=40 | m=n=48 | m=n=56 |
+| ---: | ---: | :---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| turboshtein.levenshtein | 0.0.5 | --- | 19,685,039 | 13,094,009 | 9,949,417 | 7,949,915 | 6,488,589 | 5,269,281 | 4,605,111 |
+| [rapidfuzz.distance.Levenshtein.distance](https://github.com/rapidfuzz/RapidFuzz) | 3.14.6 | **1.2x – 1.7x faster** | 11,616,641 | 9,109,890 | 7,422,064 | 6,272,703 | 5,220,116 | 4,418,830 | 3,923,236 |
+| [Levenshtein.distance](https://github.com/rapidfuzz/Levenshtein) | 0.27.5 | **1.4x – 2.4x faster** | 8,104,003 | 6,769,142 | 5,748,639 | 5,019,556 | 4,191,919 | 3,771,687 | 3,404,689 |
+| [jellyfish.levenshtein_distance](https://github.com/jamesturk/jellyfish) | 1.3.0 | **12x – 82x faster** | 1,649,960 | 549,253 | 294,319 | 138,237 | 95,645 | 72,144 | 56,138 |
+| [textdistance.levenshtein](https://github.com/life4/textdistance) | 4.6.2 | **4.9x – 16x faster** | 1,219,580 | 1,128,859 | 1,077,474 | 1,038,781 | 1,005,222 | 971,589 | 946,850 |
+
+Test setup:
+- Apple M3
+- macOS 26.6.2
+- Python 3.13
+
+### Version: 0.0.4
+
+| library | version |     m=n=8 |    m=n=16 |    m=n=24 |    m=n=32 |    m=n=40 |    m=n=48 |    m=n=56 |
 |----------------------------------------:|--------:|----------:|----------:|----------:|----------:|----------:|----------:|----------:|
 |                 turboshtein.levenshtein |   0.0.4 | 7,625,612 | 6,134,367 | 5,160,757 | 4,455,692 | 3,897,966 | 3,477,885 | 3,147,237 |
 | [Levenshtein.distance](https://github.com/maxbachmann/Levenshtein) |  0.20.5 | 6,448,035 | 5,335,239 | 4,556,680 | 4,034,226 | 3,550,695 | 3,211,664 | 2,910,581 |
