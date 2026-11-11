@@ -65,7 +65,7 @@ turbo_rates = (
 
 def calc_advantage(lib_name: str) -> str:
     if "turboshtein" in lib_name:
-        return "baseline"
+        return "---"
     lib_df = df[df["library"] == lib_name]
     multipliers = [
         turbo_rates[len_] / rate
