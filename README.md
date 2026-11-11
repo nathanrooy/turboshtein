@@ -30,7 +30,7 @@ Computing levenshtein edit distance between two strings:
 
 Note that there are several limitations, mainly:
 - Max string length must be less than 64.
-- ASCII characters only.
+- ASCII or Latin-1 characters only.
 
 ## Performance
 Values represent the number of string pairs processed per second.

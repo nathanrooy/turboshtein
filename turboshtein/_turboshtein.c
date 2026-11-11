@@ -75,9 +75,10 @@ static PyObject *turboshtein_levenshtein(PyObject *self, PyObject *const *args,
     return NULL;
   }
 
-  if (!PyUnicode_IS_ASCII(w1) || !PyUnicode_IS_ASCII(w2)) {
+  if (PyUnicode_KIND(w1) != PyUnicode_1BYTE_KIND ||
+      PyUnicode_KIND(w2) != PyUnicode_1BYTE_KIND) {
     PyErr_SetString(PyExc_ValueError,
-                    "input strings must contain only ASCII characters.");
+                    "input strings must contain only ASCII or Latin-1 characters.");
     return NULL;
   }
 
@@ -150,7 +151,7 @@ PyDoc_STRVAR(
     "-----\n"
     "This function utilizes the bit-vector algorithm developed by Myers[1]."
     "\nIt's very fast, but this implementation has a few limitations:\n"
-    "   1. Both strings must consist of exclusively ascii characters.\n"
+    "   1. Both strings must consist of exclusively ascii or latin-1 characters.\n"
     "   2. Input string lengths must be less than 64 characters each.\n"
     "\n"
     "[1] Gene Myers. 1999. A fast bit-vector algorithm for approximate string\n"

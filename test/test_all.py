@@ -85,6 +85,31 @@ class TestLevenshtein(unittest.TestCase):
         with self.assertRaises(ValueError):
             levenshtein("a" * 64, "b" * 64)
 
+    def test_latin1(self) -> None:
+        """Verify Latin-1 character support (accents, umlauts, etc.)."""
+        cases = [
+            ("café", "cafe", 1),
+            ("résumé", "resume", 2),
+            ("año", "ano", 1),
+            ("über", "uber", 1),
+            ("weiß", "weis", 1),
+            ("naïve", "naive", 1),
+            ("coöperate", "cooperate", 1),
+        ]
+        for s1, s2, expected in cases:
+            with self.subTest(s1=s1, s2=s2):
+                self.assertEqual(levenshtein(s1, s2), expected)
+                self.assertEqual(levenshtein(s2, s1), expected)
+
+    def test_unicode_unsupported_exceptions(self) -> None:
+        """Verify multi-byte Unicode (> 255) raises ValueError."""
+        with self.assertRaises(ValueError):
+            levenshtein("hello", "привет")
+        with self.assertRaises(ValueError):
+            levenshtein("hello", "你好")
+        with self.assertRaises(ValueError):
+            levenshtein("rocket", "🚀")
+
     def test_type_and_argument_errors(self) -> None:
         """Verify invalid argument types and counts raise TypeError."""
         with self.assertRaises(TypeError):
